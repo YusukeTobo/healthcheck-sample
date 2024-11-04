@@ -1,9 +1,5 @@
 package net.yutobo.healthcheck.tester;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
@@ -15,13 +11,13 @@ import jakarta.servlet.ServletException;
 @Component
 public class MyServletContextInitalizer implements ServletContextInitializer {
     private static final Logger logger = LoggerFactory.getLogger(MyServletContextInitalizer.class);
-    private static final String DEFAULT_DELAYLIST_FILE = "C:\\home\\delaylist.txt";
+
     private static final long DEFAULT_DELAY_MS = 120*1000L;
     private static final long DELAY_MS = getDelayMS();
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
-        if (shouldSkipDelay()) {
+        if (!shouldDelay()) {
             return;
         }
 
@@ -50,25 +46,7 @@ public class MyServletContextInitalizer implements ServletContextInitializer {
         }
     }
 
-    private boolean shouldSkipDelay() {
-        String delayListFile = System.getenv("DELAYLIST_FILE");
-        if (delayListFile == null) {
-            delayListFile = DEFAULT_DELAYLIST_FILE;
-        }
-
-        try (BufferedReader br = new BufferedReader(new FileReader(delayListFile))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (line.contains(System.getenv("COMPUTERNAME"))) {
-                    logger.info("{} found in delaylist.", System.getenv("COMPUTERNAME"));
-                    return true;
-                }
-            }
-        } catch (IOException ex) {
-            logger.warn("file not found...", ex);
-            return false;
-        }
-
-        return false;
+    private boolean shouldDelay() {
+        return ComputerNameUtils.hasComputerName(ComputerNameUtils.DELAYLIST_FILE);
     }
 }
