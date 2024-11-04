@@ -15,7 +15,7 @@ import jakarta.servlet.ServletException;
 @Component
 public class MyServletContextInitalizer implements ServletContextInitializer {
     private static final Logger logger = LoggerFactory.getLogger(MyServletContextInitalizer.class);
-    private static final String DEFAULT_ALLOWLIST_FILE = "C:\\home\\allowlist.txt";
+    private static final String DEFAULT_DELAYLIST_FILE = "C:\\home\\delaylist.txt";
     private static final long DEFAULT_DELAY_MS = 120*1000L;
     private static final long DELAY_MS = getDelayMS();
 
@@ -51,16 +51,16 @@ public class MyServletContextInitalizer implements ServletContextInitializer {
     }
 
     private boolean shouldSkipDelay() {
-        String allowListFile = System.getenv("ALLOWLIST_FILE");
-        if (allowListFile == null) {
-            allowListFile = DEFAULT_ALLOWLIST_FILE;
+        String delayListFile = System.getenv("DELAYLIST_FILE");
+        if (delayListFile == null) {
+            delayListFile = DEFAULT_DELAYLIST_FILE;
         }
 
-        try (BufferedReader br = new BufferedReader(new FileReader(allowListFile))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(delayListFile))) {
             String line;
             while ((line = br.readLine()) != null) {
                 if (line.contains(System.getenv("COMPUTERNAME"))) {
-                    logger.info("{} found in allowlist.", System.getenv("COMPUTERNAME"));
+                    logger.info("{} found in delaylist.", System.getenv("COMPUTERNAME"));
                     return true;
                 }
             }

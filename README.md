@@ -14,10 +14,10 @@ java -jar ./target/healthcheck-0.0.1-SNAPSHOT.jar
 | Name | Default | Explain |
 ----| ---- | ----
 | STARTUP_DELAY_MS |120000 | How long this app takes to open its HTTP port. |
-| ALLOWLIST_FILE | C:\\\\home\\\\allowlist.txt | Specify instances that skip startup delay. |
+| DELAYLIST_FILE | C:\\\\home\\\\delaylist.txt | Specify instances that skip startup delay. |
 
-## allowlist.txt
-The allowlist must be line separated value.
+## delaylist.txt
+The delaylist must be line separated value.
 ```
 InstanceA
 InstanceB
