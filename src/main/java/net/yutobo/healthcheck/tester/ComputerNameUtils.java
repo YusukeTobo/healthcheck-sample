@@ -25,7 +25,7 @@ public class ComputerNameUtils {
 
     public static boolean hasComputerName(String pathToListFile) {
         return getComputerList(pathToListFile).stream().anyMatch(computerName -> {
-            if (computerName.equals(System.getenv("COMPUTERNAME"))) {
+            if (computerName.equalsIgnoreCase(System.getenv("COMPUTERNAME"))) {
                 logger.info("{} found in the list.", System.getenv("COMPUTERNAME"));
                 return true;
             }
@@ -41,9 +41,9 @@ public class ComputerNameUtils {
                 computerList.add(line);
             }
         } catch (IOException ex) {
-            logger.warn("file not found...", ex);
+            logger.warn("file not found...{}", pathToListFile);
         }
-
+        
         return computerList;
     }
 }
