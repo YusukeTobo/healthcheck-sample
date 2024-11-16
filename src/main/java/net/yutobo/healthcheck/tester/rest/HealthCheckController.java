@@ -19,9 +19,9 @@ public class HealthCheckController {
         return req.getQueryString();
     }
 
-    @GetMapping("/delaylist")
-    public List<String> getDelaylist() {
-        return ComputerNameUtils.getComputerList(ComputerNameUtils.DELAYLIST_FILE);
+    @GetMapping("/bypasslist")
+    public List<String> getBypasslist() {
+        return ComputerNameUtils.getComputerList(ComputerNameUtils.BYPASS_LIST_FILE);
     }
 
     @GetMapping("/unhealthylist")

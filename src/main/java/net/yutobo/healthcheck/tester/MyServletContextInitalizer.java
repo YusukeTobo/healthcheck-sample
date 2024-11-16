@@ -47,6 +47,6 @@ public class MyServletContextInitalizer implements ServletContextInitializer {
     }
 
     private boolean shouldDelay() {
-        return ComputerNameUtils.hasComputerName(ComputerNameUtils.DELAYLIST_FILE);
+        return !ComputerNameUtils.hasComputerName(ComputerNameUtils.BYPASS_LIST_FILE);
     }
 }

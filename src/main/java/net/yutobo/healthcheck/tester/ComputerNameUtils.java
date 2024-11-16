@@ -12,9 +12,9 @@ import org.slf4j.LoggerFactory;
 public class ComputerNameUtils {
     private static final Logger logger = LoggerFactory.getLogger(ComputerNameUtils.class);
 
-    private static final String DEFAULT_DELAYLIST_FILE = "C:\\home\\delaylist.txt";
-    public static final String DELAYLIST_FILE = System.getenv("DELAYLIST_FILE") == null ? DEFAULT_DELAYLIST_FILE
-            : System.getenv("DELAYLIST_FILE");
+    private static final String DEFAULT_BYPASS_LIST_FILE = "C:\\home\\bypasslist.txt";
+    public static final String BYPASS_LIST_FILE = System.getenv("BYPASSLIST_FILE") == null ? DEFAULT_BYPASS_LIST_FILE
+            : System.getenv("BYPASSLIST_FILE");
     
     private static final String DEFAULT_UNHEALTYLIST_FILE = "C:\\home\\unhealthylist.txt";
     public static final String UNHEALTHYLIST_FILE = System.getenv("UNHEALTHYLIST_FILE") == null ? DEFAULT_UNHEALTYLIST_FILE
